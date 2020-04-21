@@ -1,0 +1,27 @@
+{
+  "name": "bin-to-img",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node index.ts https://sourceb.in/c752ae81a0",
+    "start": "ts-node __tests__/bot.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html-pdf": "^2.2.0",
+    "node-fetch": "^2.6.0",
+    "sourcebin-wrapper": "^1.1.2"
+  },
+  "devDependencies": {
+    "discord.js": "^12.2.0",
+    "@types/node-fetch": "^2.5.5",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^6.8.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  }
+}
