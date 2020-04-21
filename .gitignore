@@ -3,5 +3,3 @@ bin-to-img.iml
 
 node_modules/
 package-lock.json
-
-__tests__/

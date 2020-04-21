@@ -17,8 +17,8 @@ export function convert(bin: string, theme?: string) {
             .replace(/\r/g, '')
             .split(/^/gms)
             .map((val, i, array) => {
-                return `<line><num>${ i + 1 }</num><span>${ 
-                    val.replace(/</g, "&lt;") 
+                return `<line><num>${ i + 1 }</num><span>${
+                    val.replace(/</g, "&lt;")
                         .replace(/</g, "&gt;")
                 }</span></line>`
             })
@@ -46,3 +46,5 @@ export function convert(bin: string, theme?: string) {
         });
     });
 }
+
+convert(b).then(console.log).catch(console.error)
