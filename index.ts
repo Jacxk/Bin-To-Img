@@ -1,5 +1,5 @@
 import * as SourceBin from 'sourcebin-wrapper';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync } from 'fs';
 import * as pdf from 'html-pdf';
 import * as hljs from 'highlight.js';
 
