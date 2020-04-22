@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "highlight.js": "^9.18.1",
     "html-pdf": "^2.2.0",
     "node-fetch": "^2.6.0",
     "sourcebin-wrapper": "^1.1.2"
