@@ -24,7 +24,7 @@ export function convert(bin: string, theme?: string) {
             format: "Letter",
             orientation: "portrait",
             renderDelay: 0,
-        }).toFile("filePath.png", function (err, buffer) {
+        }).toBuffer(function (err, buffer) {
             if (err) return reject(err);
             resolve(buffer)
         });
