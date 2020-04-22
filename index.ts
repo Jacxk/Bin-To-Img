@@ -16,7 +16,7 @@ export function convert(bin: string, theme?: string) {
         const [ file ] = files;
         const content = file.content;
 		
-const parsed = highlight(file.language.aceMode, content).value;
+        const parsed = highlight(file.language.aceMode, content).value;
         const html = preset.replace(/{{ contents }}/, parsed);
 
         pdf.create(html, {
