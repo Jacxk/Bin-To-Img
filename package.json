@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test-lint": "npx eslint ./**",
     "test": "ts-node index.ts https://sourceb.in/c752ae81a0",
-    "start-bot": "ts-node __tests__/bot.ts"
+    "start-bot": "ts-node __tests__/bot.ts",
+    "fix": "npx eslint ./** --fix"
   },
   "keywords": [],
   "author": "",

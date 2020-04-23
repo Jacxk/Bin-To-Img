@@ -1,20 +1,22 @@
-import { Client } from "discord.js";
-import { convert } from "../index";
+import { Client } from 'discord.js';
+import { convert } from '../index';
 
-const client = new Client()
+const client = new Client();
 
-client.on("message", async message => {
+client.on('message', async message => {
     const content = message.content;
     const match = content.match(/s((ource)|(rc))b\.in\/(\S+)/);
     if (!match) return;
 
-    const [ url, , , , binKey ] = match;
+    const [
+        url, , , , binKey
+    ] = match;
 
-    console.log("Match found: ", url)
-    console.log("   Sending image...")
+    console.log('Match found: ', url);
+    console.log('   Sending image...');
 
-    const react = "🖼️";
-    const filter = (reaction, user) => reaction.emoji.name === react && !user.bot
+    const react = '🖼️';
+    const filter = (reaction, user) => reaction.emoji.name === react && !user.bot;
 
     await message.react(react).catch(console.error);
 
@@ -27,8 +29,8 @@ client.on("message", async message => {
     });
     collector.on('end', () => {
         if (message.deleted) return;
-        message.reactions.removeAll().catch(console.error)
+        message.reactions.removeAll().catch(console.error);
     });
-})
+});
 
-client.login(process.env.TOKEN).catch(console.error)
+client.login(process.env.TOKEN).catch(console.error);
