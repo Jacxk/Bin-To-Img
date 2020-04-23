@@ -8,7 +8,10 @@ client.on("message", async message => {
     const match = content.match(/s((ource)|(rc))b\.in\/(\S+)/);
     if (!match) return;
 
-    console.log("Match found: ", match[0])
+    const [ url, , , , binKey ] = match;
+
+    console.log("Match found: ", url)
+    console.log("   Sending image...")
 
     const react = "🖼️";
     const filter = (reaction, user) => reaction.emoji.name === react && !user.bot
@@ -19,7 +22,7 @@ client.on("message", async message => {
     collector.on('collect', async () => {
         if (message.deleted) return;
         await message.reactions.removeAll().catch(console.error);
-        const buffer = await convert(match[4]).catch(console.error);
+        const buffer = await convert(binKey).catch(console.error);
         await message.channel.send({ files: [ buffer ] }).catch(console.error);
     });
     collector.on('end', () => {
