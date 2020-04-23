@@ -1,7 +1,8 @@
 import * as SourceBin from 'sourcebin-wrapper';
-import { readFileSync } from 'fs';
 import * as pdf from 'html-pdf';
+
 import { highlight } from 'highlight.js';
+import { readFileSync } from 'fs';
 
 const [ b, th ] = process.argv.slice(2);
 
@@ -11,13 +12,13 @@ export function convert(bin: string, theme?: string) {
             `./presets/${ theme || th || "default" }.html`,
             { encoding: "utf8" }
         ));
-		
+
         const { files } = await SourceBin.get(bin);
         const [ file ] = files;
-        const content = file.content;
-		
-        const parsed = highlight(file.language.aceMode, content).value;
-        const html = preset.replace(/{{ contents }}/, parsed);
+        const { content, language } = file;
+
+        const { value } = highlight(language.aceMode, content);
+        const html = parseContents(value, preset);
 
         pdf.create(html, {
             type: "png",
@@ -29,6 +30,20 @@ export function convert(bin: string, theme?: string) {
             resolve(buffer)
         });
     });
+}
+
+function parseContents(contents: string, preset: string): string {
+    const html = contents
+        .replace(/^ {4}/gm, "  ")
+        .replace(/\r/g, '')
+        .split(/^/gms)
+        .map((content, i, array) => {
+            const { length } = String(array.length);
+            const lineNumber = String(i + 1).padStart(length, " ");
+            return `<line><num>${ lineNumber }</num><cnt>${ content }</cnt></line>`
+        })
+        .join('')
+    return preset.replace(/{{ contents }}/, html);
 }
 
 convert(b).then(console.log).catch(console.error)
