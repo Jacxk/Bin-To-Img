@@ -13,12 +13,11 @@ export function convert(bin: string, theme?: string) {
             { encoding: "utf8" }
         ));
 
-        const { files } = await SourceBin.get(bin);
-        const [ file ] = files;
-        const { content, language } = file;
+        const { files: [ file ] } = await SourceBin.get(bin);
+        const { content, language: { aceMode } } = file;
 
-        const { value } = highlight(language.aceMode, content);
-        const html = parseContents(value, preset);
+        const { value: contents } = highlight(aceMode, content);
+        const html = parseContents(contents, preset);
 
         pdf.create(html, {
             type: "png",
