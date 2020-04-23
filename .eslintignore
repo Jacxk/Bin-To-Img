@@ -1,7 +1,2 @@
-# Ignore everything
-/**
-
-# Do not ignore
+presets
 !presets/*.js
-!__tests__
-!index.ts

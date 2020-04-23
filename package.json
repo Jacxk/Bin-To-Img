@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-lint": "npx eslint ./**/*",
-    "test": "ts-node index.ts https://sourceb.in/c752ae81a0",
-    "start-bot": "ts-node __tests__/bot.ts",
-    "fix": "npx eslint ./**/* --fix"
+    "test-lint": "npx eslint src/**/*",
+    "test": "ts-node src/index.ts https://sourceb.in/c752ae81a0",
+    "start-bot": "ts-node src/__tests__/bot.ts",
+    "fix": "npx eslint src/**/* --fix"
   },
   "keywords": [],
   "author": "",

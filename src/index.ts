@@ -11,7 +11,7 @@ const [
 export function convert(bin: string, theme?: string) {
     return new Promise<Buffer>(async (resolve, reject) => {
         const preset = String(readFileSync(
-            `./presets/${ theme || th || 'default' }.html`,
+            `./src/presets/${ theme || th || 'default' }.html`,
             { encoding: 'utf8' }
         ));
 
