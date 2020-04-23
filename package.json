@@ -1,7 +1,6 @@
 {
   "name": "bin-to-img",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test-lint": "npx eslint src/**/*",
@@ -14,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "highlight.js": "^9.18.1",
-    "html-pdf": "^2.2.0",
+    "html-pdf": "github:418sec/node-html-pdf#master",
     "node-fetch": "^2.6.0",
     "sourcebin-wrapper": "^1.1.2"
   },
@@ -26,5 +25,14 @@
     "eslint": "^6.8.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jacxk/Bin-To-Img.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jacxk/Bin-To-Img/issues"
+  },
+  "homepage": "https://github.com/Jacxk/Bin-To-Img#readme",
+  "description": ""
 }
