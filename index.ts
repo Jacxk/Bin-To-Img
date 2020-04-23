@@ -34,7 +34,6 @@ export function convert(bin: string, theme?: string) {
 
 function parseContents(contents: string, preset: string): string {
     const html = contents
-        .replace(/^ {4}/gm, "  ")
         .replace(/\r/g, '')
         .split(/^/gms)
         .map((content, i, array) => {
@@ -46,4 +45,4 @@ function parseContents(contents: string, preset: string): string {
     return preset.replace(/{{ contents }}/, html);
 }
 
-convert(b).then(console.log).catch(console.error)
+if (b) convert(b).then(console.log).catch(console.error)
