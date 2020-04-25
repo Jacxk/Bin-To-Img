@@ -1,18 +1,22 @@
 import * as SourceBin from 'sourcebin-wrapper';
-import * as pdf from 'html-pdf';
+import { create as createImage } from 'html-pdf';
 
 import { highlight } from 'highlight.js';
 import { readFileSync } from 'fs';
 
 const [
-    b, th
+    b,
+    th,
+    pth
 ] = process.argv.slice(2);
 
-export function convert(bin: string, theme?: string) {
+export function convert(bin: string, theme = th || 'default', path = pth) {
     return new Promise<Buffer>(async (resolve, reject) => {
         const preset = String(readFileSync(
-            `./src/presets/${ theme || th || 'default' }.html`,
-            { encoding: 'utf8' }
+            `./src/presets/${ theme }.html`,
+            {
+                encoding: 'utf8'
+            }
         ));
 
         SourceBin.get(bin).then(({ files: [ file ] }) => {
@@ -20,16 +24,27 @@ export function convert(bin: string, theme?: string) {
 
             const { value: contents } = highlight(aceMode, content);
             const html = parseContents(contents, preset);
-
-            pdf.create(html, {
+            const options = {
                 type: 'png',
                 format: 'Letter',
                 orientation: 'portrait',
                 renderDelay: 0,
-            }).toBuffer(function (err, buffer) {
-                if (err) return reject(err);
-                resolve(buffer);
-            });
+            };
+
+            if (path) {
+                createImage(html, options)
+                    .toFile(path, function (err, filePath) {
+                        if (err) return reject(err);
+                        resolve(filePath);
+                    });
+            } else {
+                createImage(html, options)
+                    .toBuffer(function (err, buffer) {
+                        if (err) return reject(err);
+                        resolve(buffer);
+                    });
+            }
+
         }).catch(reject);
     });
 }
