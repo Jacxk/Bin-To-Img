@@ -5,7 +5,7 @@ import { highlight } from 'highlight.js';
 import { readFileSync } from 'fs';
 
 const [
-    b, th 
+    b, th
 ] = process.argv.slice(2);
 
 export function convert(bin: string, theme?: string) {
@@ -15,21 +15,22 @@ export function convert(bin: string, theme?: string) {
             { encoding: 'utf8' }
         ));
 
-        const { files: [ file ] } = await SourceBin.get(bin);
-        const { content, language: { aceMode } } = file;
+        SourceBin.get(bin).then(({ files: [ file ] }) => {
+            const { content, language: { aceMode } } = file;
 
-        const { value: contents } = highlight(aceMode, content);
-        const html = parseContents(contents, preset);
+            const { value: contents } = highlight(aceMode, content);
+            const html = parseContents(contents, preset);
 
-        pdf.create(html, {
-            type: 'png',
-            format: 'Letter',
-            orientation: 'portrait',
-            renderDelay: 0,
-        }).toBuffer(function (err, buffer) {
-            if (err) return reject(err);
-            resolve(buffer);
-        });
+            pdf.create(html, {
+                type: 'png',
+                format: 'Letter',
+                orientation: 'portrait',
+                renderDelay: 0,
+            }).toBuffer(function (err, buffer) {
+                if (err) return reject(err);
+                resolve(buffer);
+            });
+        }).catch(reject);
     });
 }
 
@@ -46,4 +47,14 @@ function parseContents(contents: string, preset: string): string {
     return preset.replace(/{{ contents }}/, html);
 }
 
-if (b) convert(b).then(() => process.exit()).catch(() => process.exit(2));
+if (b) {
+    convert(b)
+        .then(buffer => {
+            console.log(buffer);
+            process.exit();
+        })
+        .catch(error => {
+            console.error(error);
+            process.exit(1);
+        });
+}
