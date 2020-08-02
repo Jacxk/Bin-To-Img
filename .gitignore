@@ -1,5 +1,5 @@
 .idea/
 bin-to-img.iml
+out/
 
 node_modules/
-package-lock.json

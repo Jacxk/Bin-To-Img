@@ -31,11 +31,18 @@
       "error",
       "always"
     ],
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "minProperties": 5
+      }
+    ],
     "array-bracket-newline": [
       "error",
       {
         "multiline": true,
-        "minItems": 2
+        "minItems": 4
       }
     ],
     "indent": [

@@ -1,7 +1,8 @@
 import { Client } from 'discord.js';
-import { convert } from '../index';
+import { BinImage } from '../index';
 
 const client = new Client();
+const { fromSourceBin } = new BinImage();
 
 client.on('message', async message => {
     const content = message.content;
@@ -24,7 +25,7 @@ client.on('message', async message => {
     collector.on('collect', async () => {
         if (message.deleted) return;
         await message.reactions.removeAll().catch(console.error);
-        const buffer = await convert(binKey).catch(console.error);
+        const buffer = await fromSourceBin({ url: binKey }).catch(console.error);
         await message.channel.send({ files: [ buffer ] }).catch(console.error);
     });
     collector.on('end', () => {
