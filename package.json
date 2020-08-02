@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test-lint": "npx eslint src/**/*",
-    "test": "ts-node src/index.ts https://sourceb.in/c752ae81a0",
+    "test": "node src/__test__/file.test.js && node src/__test__/sourcebin.test.js",
     "start-bot": "ts-node src/__tests__/bot.ts",
     "fix": "npx eslint src/**/* --fix"
   },

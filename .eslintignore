@@ -1,2 +1,4 @@
 presets
 !presets/*.js
+
+**/__tests__/code/
