@@ -14,7 +14,7 @@
   "dependencies": {
     "highlight.js": "^9.18.1",
     "html-pdf": "github:418sec/node-html-pdf#master",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "sourcebin-wrapper": "^1.4.0"
   },
   "devDependencies": {
